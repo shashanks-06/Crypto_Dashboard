@@ -38,7 +38,13 @@ const SideNav = () => {
       h="100vh"
     >
       <Box>
-        <Heading textAlign="center" fontSize="20px" as="h2" color="#5F00D9">
+        <Heading
+          textAlign="center"
+          fontSize="20px"
+          as="h1"
+          pt="3.5rem"
+          color="#5F00D9"
+        >
           @SHASHANK_S
         </Heading>
         <Box mx="3" mt="6">
