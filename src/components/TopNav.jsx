@@ -10,8 +10,10 @@ import {
   Button,
   Box,
   Icon,
+  Text,
 } from "@chakra-ui/react";
 import { FaCircleUser } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
 const TopNav = ({ title, onOpen }) => {
@@ -35,8 +37,12 @@ const TopNav = ({ title, onOpen }) => {
             <Icon as={FaCircleUser} fontSize="24px" boxSize={8} color="black" />
           </MenuButton>
           <MenuList>
-            <MenuItem>Support</MenuItem>
-            <MenuItem>LogOut</MenuItem>
+            <Link to="/support">
+              <MenuItem>Support</MenuItem>
+            </Link>
+            <Link to="/">
+              <MenuItem>LogOut</MenuItem>
+            </Link>
           </MenuList>
         </Menu>
       </HStack>
