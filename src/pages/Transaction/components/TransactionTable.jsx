@@ -9,6 +9,10 @@ import {
   Stack,
   Text,
   Tag,
+  SimpleGrid,
+  Box,
+  Flex,
+  HStack,
 } from "@chakra-ui/react";
 
 const TransactionTable = () => {
@@ -103,67 +107,130 @@ const TransactionTable = () => {
   };
 
   return (
-    <TableContainer>
-      <Table variant="simple" colorScheme="gray">
-        <Thead>
-          <Tr>
-            <Th>ID</Th>
-            <Th>Date & Time</Th>
-            <Th>Type</Th>
-            <Th>Amount</Th>
-            <Th>Status</Th>
-          </Tr>
-        </Thead>
-        <Tbody color="p.black">
-          {tableData.map((data) => (
-            <Tr key={data.id}>
-              <Td fontSize="sm" fontWeight="medium">
-                {data.id}
-              </Td>
-              <Td>
-                <Stack spacing={0}>
+    <SimpleGrid columns={{ base: 1, xxl: 3 }} spacing={4}>
+      <Box display={{ base: "none", md: "block" }}>
+        <TableContainer>
+          <Table variant="simple" colorScheme="gray">
+            <Thead>
+              <Tr>
+                <Th>ID</Th>
+                <Th>Date & Time</Th>
+                <Th>Type</Th>
+                <Th>Amount</Th>
+                <Th>Status</Th>
+              </Tr>
+            </Thead>
+            <Tbody color="p.black">
+              {tableData.map((data) => (
+                <Tr key={data.id}>
+                  <Td fontSize="sm" fontWeight="medium">
+                    {data.id}
+                  </Td>
+                  <Td>
+                    <Stack spacing={0}>
+                      <Text fontSize="sm" fontWeight="medium">
+                        {data.date}
+                      </Text>
+                      <Text fontSize="xs" color="black.60">
+                        {data.time}
+                      </Text>
+                    </Stack>
+                  </Td>
+                  <Td>
+                    <Stack spacing={0}>
+                      <Text fontSize="sm" fontWeight="medium">
+                        {data.type.name}
+                      </Text>
+                      <Text fontSize="xs" color="black.60">
+                        {data.type?.tag}
+                      </Text>
+                    </Stack>
+                  </Td>
+                  <Td>
+                    <Stack spacing={0}>
+                      <Text fontSize="sm" fontWeight="medium">
+                        {data.amount.primary}
+                      </Text>
+                      <Text fontSize="xs" color="black.60">
+                        {data.amount?.secondary}
+                      </Text>
+                    </Stack>
+                  </Td>
+                  <Td fontSize="sm" fontWeight="medium">
+                    <Tag
+                      color="white"
+                      borderRadius="full"
+                      bg={statusColor[data.status]}
+                    >
+                      {data.status}
+                    </Tag>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
+      <Flex>
+        <Box display={{ base: "block", md: "none" }}>
+          <SimpleGrid columns={2} spacing={4}>
+            {/* Add grid items here */}
+            {tableData.map((data) => (
+              <Box key={data.id} borderWidth="1px" borderRadius="lg" p="4">
+                <HStack>
                   <Text fontSize="sm" fontWeight="medium">
-                    {data.date}
+                    ID:
                   </Text>
-                  <Text fontSize="xs" color="black.60">
-                    {data.time}
-                  </Text>
-                </Stack>
-              </Td>
-              <Td>
-                <Stack spacing={0}>
+                  <Text>{data.id}</Text>
+                </HStack>
+                <HStack>
                   <Text fontSize="sm" fontWeight="medium">
-                    {data.type.name}
+                    Date & Time:
                   </Text>
-                  <Text fontSize="xs" color="black.60">
-                    {data.type?.tag}
-                  </Text>
-                </Stack>
-              </Td>
-              <Td>
-                <Stack spacing={0}>
+                  <HStack>
+                    <Text>{data.date}</Text>
+                    <Text fontSize="xs" color="black.60">
+                      {data.time}
+                    </Text>
+                  </HStack>
+                </HStack>
+                <HStack>
                   <Text fontSize="sm" fontWeight="medium">
-                    {data.amount.primary}
+                    Type:{" "}
                   </Text>
-                  <Text fontSize="xs" color="black.60">
-                    {data.amount?.secondary}
+                  <HStack>
+                    <Text>{data.type.name}</Text>
+                    <Text fontSize="xs" color="black.60">
+                      {data.type?.tag}
+                    </Text>
+                  </HStack>
+                </HStack>
+                <HStack>
+                  <Text fontSize="sm" fontWeight="medium">
+                    Amount:{" "}
                   </Text>
-                </Stack>
-              </Td>
-              <Td fontSize="sm" fontWeight="medium">
-                <Tag
-                  color="white"
-                  borderRadius="full"
-                  bg={statusColor[data.status]}
-                >
-                  {data.status}
-                </Tag>
-              </Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+                  <HStack>
+                    <Text>{data.amount.primary}</Text>
+                    <Text fontSize="xs" color="black.60">
+                      {data.amount?.secondary}
+                    </Text>
+                  </HStack>
+                </HStack>
+                <HStack>
+                  <Tag
+                    color="white"
+                    borderRadius="full"
+                    bg={statusColor[data.status]}
+                  >
+                    {data.status}
+                  </Tag>
+                </HStack>
+              </Box>
+            ))}
+          </SimpleGrid>
+        </Box>
+      </Flex>
+    </SimpleGrid>
   );
 };
 // "?" used for undefined data values in table
