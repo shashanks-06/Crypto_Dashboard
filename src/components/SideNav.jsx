@@ -2,9 +2,15 @@ import { Box, Stack, HStack, Icon, Text, Heading } from "@chakra-ui/react";
 import { RxDashboard } from "react-icons/rx";
 import { GrTransaction } from "react-icons/gr";
 import { BiSupport } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const SideNav = () => {
+  const location = useLocation();
+  console.log(location);
+
+  const isActiveLink = (link) => {
+    return location.pathname === link;
+  };
   const navLinks = [
     {
       icon: RxDashboard,
@@ -40,6 +46,8 @@ const SideNav = () => {
           {navLinks.map((nav) => (
             <Link to={nav.link} key={nav.text}>
               <HStack
+                bg={isActiveLink(nav.link) ? "#F3F3F7" : "transparent"}
+                color={isActiveLink(nav.link) ? "#171717" : "#797E82"}
                 borderRadius="10px"
                 px="3"
                 py="4"
@@ -47,7 +55,6 @@ const SideNav = () => {
                   bg: "#EEEEF4",
                   color: "#171717",
                 }}
-                color="#797E82"
               >
                 <Icon as={nav.icon} />
                 <Text fontSize="14px" fontWeight="medium">
@@ -64,11 +71,12 @@ const SideNav = () => {
             borderRadius="10px"
             px="3"
             py="4"
+            bg={isActiveLink("/support") ? "#F3F3F7" : "transparent"}
+            color={isActiveLink("/support") ? "#171717" : "#797E82"}
             _hover={{
-              bg: "#EEEEF4",
+              bg: "#F3F3F7",
               color: "#171717",
             }}
-            color="#797E82"
           >
             <Icon as={BiSupport} />
             <Text fontSize="14px" fontWeight="medium">
